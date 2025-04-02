@@ -1,8 +1,12 @@
-public class Inmuebles {
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
+public class Inmueble {
     
     [BsonId]
     [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
     public string? Id { get; set;}
+
     [BsonElement("tipo")]
     public string Tipo { get; set;} = string.Empty;
     [BsonElement("operacion")]
