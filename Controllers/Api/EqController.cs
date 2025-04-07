@@ -81,19 +81,14 @@ public class EqController : Controller {
 
         [HttpGet("listar-fechapublicacion")]
     public IActionResult ListarFechaPublicacion (){
-        //listar todos los registros de renta
+        //listar todos los registros de Fecha Publicacion
 
         MongoClient client = new MongoClient(CadenasConexion.MONGO_DB);
         var db = client.GetDatabase("Inmuebles");
         var collection = db.GetCollection<Inmueble>("RentasVentas");
 
-        //que el tipo sea terreno
-        var filtroTipo = Builders<Inmueble>.Filter.Eq(x => x.Tipo, "Terreno");
-        //que el costo sea 33421
-        var filtroCosto = Builders<Inmueble>.Filter.Eq(x => x.Costo, 33421);
-
-        var filtroCompuesto = Builders<Inmueble>.Filter.And( filtroTipo, filtroCosto);
-        var lista = collection.Find(filtroCompuesto).ToList();
+        var filtro = Builders<Inmueble>.Filter.Eq(x => x.FechaPublicacion, "2025-02-26");
+        var lista = collection.Find(filtro).ToList();
         return Ok (lista);
     }
 }
